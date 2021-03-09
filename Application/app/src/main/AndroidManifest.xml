@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MapPoint"></activity>
+        <activity android:name=".MapPointActivity"></activity>
+        <activity android:name=".MapWayActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class MapPoint extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,
+public class MapPointActivity extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,
         OnMapReadyCallback {
 
     private Marker marker;

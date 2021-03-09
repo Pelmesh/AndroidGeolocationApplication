@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signUp(View view){
-        Intent intent = new Intent(this, MapPoint.class);
+        Intent intent = new Intent(this, MapWayActivity.class);
         startActivity(intent);
     }
 }
