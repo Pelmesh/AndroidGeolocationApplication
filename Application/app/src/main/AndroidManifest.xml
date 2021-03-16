@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,8 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MapPointActivity"></activity>
-        <activity android:name=".MapWayActivity"></activity>
+        <service
+            android:name=".childrenActivity.GPSTrackerService"
+            android:enabled="true"
+            android:stopWithTask="false"
+            android:exported="true">
+        </service>
+        <activity android:name=".childrenActivity.GPSTrackerActivity" />
+        <activity android:name=".parentActivity.MapPointActivity" />
+        <activity android:name=".parentActivity.MapWayActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

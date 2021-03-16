@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.childrenActivity;
 
 import android.Manifest;
 import android.app.AlarmManager;
@@ -15,11 +15,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,12 +24,19 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 
+import com.example.application.R;
+import com.example.application.SendData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class GPSTrackerService extends Service implements  LocationListener{
 
     private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
     private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
 
     protected LocationManager locationManager;
+    private SendData sendData = new SendData();
 
     @Nullable
     @Override
@@ -50,7 +54,7 @@ public class GPSTrackerService extends Service implements  LocationListener{
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+            return;
         }
         locationManager.requestLocationUpdates(
                 LocationManager.GPS_PROVIDER,
@@ -92,23 +96,25 @@ public class GPSTrackerService extends Service implements  LocationListener{
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        String message = String.format(
-                    "New Location \n Longitude: %1$s \n Latitude: %2$s",
-                    location.getLongitude(), location.getLatitude()
-            );
-            System.out.println(message);
+        try {
+            sendLocation(location.getLongitude(), location.getLatitude());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        Intent restartService = new Intent(getApplicationContext(),
-                this.getClass());
-        restartService.setPackage(getPackageName());
-        PendingIntent restartServicePI = PendingIntent.getService(
-                getApplicationContext(), 1, restartService,
-                PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-        alarmService.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 1000, restartServicePI);
+    private void sendLocation(double longitude, double latitude) throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("latitudes", latitude);
+        json.put("longitudes", longitude);
+        new Thread(() -> {
+            try {
+                sendData.sendLocation(json);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(e);
+            }
+        }).start();
     }
 
 }

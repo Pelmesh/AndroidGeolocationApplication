@@ -1,4 +1,4 @@
-package com.example.application;
+package com.example.application.parentActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -9,6 +9,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.application.R;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -70,7 +71,6 @@ public class MapPointActivity extends AppCompatActivity implements GoogleMap.OnM
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-
         return false;
     }
 
@@ -81,6 +81,5 @@ public class MapPointActivity extends AppCompatActivity implements GoogleMap.OnM
     }
 
     public void savePoint(View view){
-
     }
 }
