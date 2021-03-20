@@ -4,64 +4,66 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.application.childrenActivity.ChildActivity;
+import com.example.application.parentActivity.ParentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
     private final SendData sendData = new SendData();
-    private final String ERROR_PASS = "Пароли не совпадают";
-    private final String ERROR_FIELD_NULL = "Введите данные";
-    private final String ERROR_400 = "Такой пользователь уже существует";
     private EditText email;
-    private EditText username;
     private EditText password;
-    private EditText password2;
     private TextView errorText;
-    boolean isSignUp = false;
+    private RadioButton parentRadio;
+    private RadioButton childRadio;
+    private final String ERROR_FIELD_NULL = "Введите данные";
+    private final String ERROR_400 = "Неверные данные";
+    boolean isSignIn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_up);
+        setContentView(R.layout.activity_sign_in);
         email = (EditText) findViewById(R.id.email);
-        username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
-        password2 = (EditText) findViewById(R.id.password2);
         errorText = (TextView) findViewById(R.id.errorText);
+        parentRadio = (RadioButton) findViewById(R.id.parent);
+        childRadio = (RadioButton) findViewById(R.id.child);
     }
 
-    public void registration(View view) throws JSONException {
+    public void login(View view) throws JSONException {
         errorText.setText("");
-        if (username.getText().toString().equals("") ||
-                email.getText().toString().equals("") ||
+        if (email.getText().toString().equals("") ||
                 password.getText().toString().equals("")) {
             errorText.setText(ERROR_FIELD_NULL);
             return;
         }
-        if (!password.getText().equals(password2.getText())) {
-            errorText.setText(ERROR_PASS);
-            return;
-        }
         JSONObject json = new JSONObject();
-        json.put("username", username.getText());
         json.put("email", email.getText());
         json.put("password", password.getText());
         new Thread(() -> {
             try {
-                isSignUp = sendData.isRegistration(json);
+                isSignIn = sendData.isLogin(json);
             } catch (IOException e) {
                 e.printStackTrace();
             }
             runOnUiThread(() -> {
-                if (isSignUp) {
-                    Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                    startActivity(intent);
+                if (isSignIn) {
+                    if (parentRadio.isChecked()) {
+                        Intent intent = new Intent(getApplicationContext(), ParentActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), ChildActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     errorText.setText(ERROR_400);
                 }

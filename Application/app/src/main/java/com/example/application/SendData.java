@@ -1,5 +1,7 @@
 package com.example.application;
 
+import com.example.application.util.UserUtil;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,8 +17,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SendData {
-
-    private String URL = "http://10.0.2.2:8080/api";
+    private final UserUtil userUtil = new UserUtil();
+    private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    private final String URL = "http://10.0.2.2:8080/api";
+    private final String URL_REG = "http://10.0.2.2:8080/api/user/registration";
+    private final String URL_LOG = "http://10.0.2.2:8080/api/user/login";
 
     public void sendLocation(JSONObject json) throws IOException, JSONException {
         JSONObject jsonUser = new JSONObject();
@@ -40,6 +45,29 @@ public class SendData {
                 System.out.println(e);
             }
         });
+    }
+
+    public boolean isRegistration(JSONObject json) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, json.toString());
+        Request request = new okhttp3.Request.Builder()
+                .url(URL_REG)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        return response.code() == 200;
+    }
+
+    public boolean isLogin(JSONObject json) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(JSON, json.toString());
+        Request request = new okhttp3.Request.Builder()
+                .url(URL_LOG)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        if (response.code() != 200) return false;
+        return userUtil.saveUser(response);
     }
 
 }
