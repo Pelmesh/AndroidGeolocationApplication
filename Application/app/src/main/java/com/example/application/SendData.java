@@ -25,8 +25,8 @@ public class SendData {
 
     public void sendLocation(JSONObject json) throws IOException, JSONException {
         JSONObject jsonUser = new JSONObject();
-        jsonUser.put("id",1);
-        json.put("user",jsonUser);
+        jsonUser.put("id", 1);
+        json.put("user", jsonUser);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json.toString());
@@ -58,16 +58,14 @@ public class SendData {
         return response.code() == 200;
     }
 
-    public boolean isLogin(JSONObject json) throws IOException {
+    public Response isLogin(JSONObject json) throws IOException {
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new okhttp3.Request.Builder()
                 .url(URL_LOG)
                 .post(body)
                 .build();
-        Response response = client.newCall(request).execute();
-        if (response.code() != 200) return false;
-        return userUtil.saveUser(response);
+        return client.newCall(request).execute();
     }
 
 }
