@@ -28,8 +28,8 @@ public class SignInActivity extends AppCompatActivity {
     private TextView errorText;
     private RadioButton parentRadio;
     private RadioButton childRadio;
-    private final String ERROR_FIELD_NULL = "Введите данные";
-    private final String ERROR_400 = "Неверные данные";
+    private final static String ERROR_FIELD_NULL = "Введите данные";
+    private final static String ERROR_400 = "Неверные данные";
     Response response;
 
     @Override
@@ -92,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
             sPref = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor ed = sPref.edit();
             ed.putString("user", jsonResponse.getString("username"));
-            ed.putString("id", jsonResponse.getString("id"));
+            ed.putInt("id", jsonResponse.getInt("id"));
             ed.putString("role", role);
             ed.commit();
         } catch (Exception e) {

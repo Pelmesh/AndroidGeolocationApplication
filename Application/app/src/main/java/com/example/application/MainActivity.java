@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkingActiveUser() {
         role = sPref.getString("role", "NULL");
-        return !(sPref.getString("user", "NULL").equals("NULL") || sPref.getString("id", "NULL").equals("NULL"));
+        return !(sPref.getString("user", "NULL").equals("NULL") || sPref.getInt("id", -1) == -1);
     }
 
 }
