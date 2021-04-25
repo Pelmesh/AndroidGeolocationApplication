@@ -7,6 +7,51 @@
     tools:context=".parentActivity.ParentActivity">
 
     <Button
+        android:id="@+id/historyButton"
+        android:layout_width="300dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#03A9F4"
+        android:backgroundTintMode="add"
+        android:onClick="openHistory"
+        android:text="История по дням"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pointButton"
+        android:layout_width="300dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#03A9F4"
+        android:backgroundTintMode="add"
+        android:onClick="openPoint"
+        android:text="Точки"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+
+    <Button
+        android:id="@+id/addPointButton"
+        android:layout_width="300dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#03A9F4"
+        android:backgroundTintMode="add"
+        android:onClick="addPoint"
+        android:text="Добавить точку"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pointButton" />
+
+    <Button
         android:id="@+id/logout"
         android:layout_width="174dp"
         android:layout_height="39dp"
@@ -21,4 +66,5 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="#DD2C00" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

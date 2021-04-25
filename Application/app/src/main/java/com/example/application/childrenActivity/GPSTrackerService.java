@@ -111,8 +111,8 @@ public class GPSTrackerService extends Service implements LocationListener {
             userJson.put("id", id);
             JSONObject json = new JSONObject();
             json.put("user", userJson);
-            json.put("latitudes", latitude);
-            json.put("longitudes", longitude);
+            json.put("latitude", latitude);
+            json.put("longitude", longitude);
             new Thread(() -> {
                 try {
                     sendData.sendLocation(json);

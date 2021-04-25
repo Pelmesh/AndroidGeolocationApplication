@@ -44,7 +44,7 @@ public class SignUpActivity extends AppCompatActivity {
             errorText.setText(ERROR_FIELD_NULL);
             return;
         }
-        if (!password.getText().equals(password2.getText())) {
+        if (!password.getText().toString().equals(password2.getText().toString())) {
             errorText.setText(ERROR_PASS);
             return;
         }

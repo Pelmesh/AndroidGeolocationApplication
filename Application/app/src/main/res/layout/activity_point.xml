@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    android:layout_marginTop="50dip"
+    android:layout_marginBottom="50dip"
+    android:orientation="horizontal"
+    app:layout_goneMarginBottom="50dip"
+    app:layout_goneMarginEnd="50dip"
+    app:layout_goneMarginStart="50dip"
+    app:layout_goneMarginTop="50dip">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="234dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="13dp"
+        android:layout_toStartOf="@+id/button"
+        android:paddingLeft="30dp"
+        android:textSize="18dp"
+        android:typeface="sans" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="124dp"
+        android:layout_height="41dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="5dp"
+        android:text="Удалить"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78" />
+
+
+</RelativeLayout>

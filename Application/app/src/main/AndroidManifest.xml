@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application"
         android:usesCleartextTraffic="true">
-        <activity android:name=".parentActivity.ParentActivity"></activity>
+        <activity android:name=".parentActivity.HistoryActivity"></activity>
+        <activity android:name=".parentActivity.ParentActivity" />
         <activity android:name=".SignInActivity" />
 
         <service
@@ -28,6 +29,7 @@
         <activity android:name=".childrenActivity.ChildActivity" />
         <activity android:name=".parentActivity.MapPointActivity" />
         <activity android:name=".parentActivity.MapWayActivity" />
+        <activity android:name=".parentActivity.AllPointsActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -42,7 +44,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="" />
+            android:value="AIzaSyCOsx3hXhAWplY1QTchUajMeP-dsVdMlrE" />
     </application>
 
 </manifest>
