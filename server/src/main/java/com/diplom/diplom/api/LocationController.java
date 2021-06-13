@@ -52,8 +52,11 @@ public class LocationController {
 
     @GetMapping("history/{id}/{date}")
     public Object getDayHistory(@PathVariable Long id, @PathVariable Date date) {
-        return  geolocationService.findByUserAndDate(userService.findById(id).get(),date, Sort.by(Sort.Direction.ASC, "time"));
+        return  geolocationService
+                .findByUserAndDate(
+                        userService.findById(id)
+                                .get(),date,
+                        Sort.by(Sort.Direction.ASC,
+                                "time"));
     }
-
-
 }

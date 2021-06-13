@@ -19,11 +19,11 @@ public class Geolocation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "latitudes")
-    private float latitudes;
+    @Column(name = "latitude")
+    private float latitude;
 
-    @Column(name = "longitudes")
-    private float longitudes;
+    @Column(name = "longitude")
+    private float longitude;
 
     @Column(name = "date")
     private Date date;
@@ -43,20 +43,20 @@ public class Geolocation {
         this.id = id;
     }
 
-    public float getLatitudes() {
-        return latitudes;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public void setLatitudes(float latitudes) {
-        this.latitudes = latitudes;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
-    public float getLongitudes() {
-        return longitudes;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public void setLongitudes(float longitudes) {
-        this.longitudes = longitudes;
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public User getUser() {

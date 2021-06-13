@@ -118,7 +118,6 @@ public class MapPointActivity extends AppCompatActivity implements GoogleMap.OnM
             return;
         }
         JSONObject userJson = new JSONObject();
-        int id = sPref.getInt("id", -1);
         userJson.put("id", sPref.getInt("id", -1));
         JSONObject json = new JSONObject();
         json.put("user", userJson);

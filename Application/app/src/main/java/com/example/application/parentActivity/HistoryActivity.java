@@ -53,16 +53,13 @@ public class HistoryActivity extends AppCompatActivity {
             });
         }).start();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
 //                Toast.makeText(getApplicationContext(), adapter.getItem(position).toString(),
 //                        Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), MapWayActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MapWayActivity.class);
 
-                intent.putExtra("DATE", adapter.getItem(position));
-                startActivity(intent);
-            }
+            intent.putExtra("DATE", adapter.getItem(position));
+            startActivity(intent);
         });
     }
 

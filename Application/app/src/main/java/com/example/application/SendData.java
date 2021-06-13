@@ -1,7 +1,5 @@
 package com.example.application;
 
-import com.example.application.util.UserUtil;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,17 +12,16 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SendData {
-    private final UserUtil userUtil = new UserUtil();
     private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final String URL = "http://10.0.2.2:8080/api/locations";
     private static final String URL_HISTORY = "http://10.0.2.2:8080/api/locations/history";
     private static final String URL_REG = "http://10.0.2.2:8080/api/user/registration";
     private static final String URL_LOG = "http://10.0.2.2:8080/api/user/login";
+    private static final String URL_POINT = "http://10.0.2.2:8080/api/point";
     private static final String URL_POINTS = "http://10.0.2.2:8080/api/point/user";
     private static final String URL_SAVE_POINT = "http://10.0.2.2:8080/api/point";
 
     public void sendLocation(JSONObject json) throws IOException, JSONException {
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(JSON, json.toString());
         Request request = new okhttp3.Request.Builder()
@@ -89,4 +86,20 @@ public class SendData {
         return client.newCall(request).execute();
     }
 
+    public Response getPointById(int id) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new okhttp3.Request.Builder()
+                .url(URL_POINT+"/"+id)
+                .build();
+        return client.newCall(request).execute();
+    }
+
+    public void deletePointById(int id) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new okhttp3.Request.Builder()
+                .url(URL_POINT+"/"+id)
+                .delete()
+                .build();
+        client.newCall(request).execute();
+    }
 }

@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application"
         android:usesCleartextTraffic="true">
-        <activity android:name=".parentActivity.HistoryActivity"></activity>
+        <activity android:name=".parentActivity.HistoryActivity"/>
         <activity android:name=".parentActivity.ParentActivity" />
         <activity android:name=".SignInActivity" />
 
@@ -31,6 +31,7 @@
         <activity android:name=".parentActivity.MapWayActivity" />
         <activity android:name=".parentActivity.AllPointsActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".parentActivity.PointOnMapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

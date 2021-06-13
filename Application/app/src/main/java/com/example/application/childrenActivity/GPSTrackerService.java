@@ -31,8 +31,8 @@ import org.json.JSONObject;
 
 public class GPSTrackerService extends Service implements LocationListener {
 
-    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 20; // in Meters
+    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 15000; // in Milliseconds
 
     protected LocationManager locationManager;
     private SendData sendData = new SendData();

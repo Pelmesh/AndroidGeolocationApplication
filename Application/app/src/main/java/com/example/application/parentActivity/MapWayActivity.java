@@ -62,7 +62,8 @@ public class MapWayActivity extends FragmentActivity implements OnMapReadyCallba
 
     private List<Geolocation> getHistory(String date) throws IOException, JSONException {
         sPref = PreferenceManager.getDefaultSharedPreferences(this);
-        Response response = sendData.getDayHistory(String.valueOf(sPref.getInt("id", -1)), date);
+        Response response = sendData
+                .getDayHistory(String.valueOf(sPref.getInt("id", -1)), date);
         Type userListType = new TypeToken<ArrayList<Geolocation>>() {
         }.getType();
         JSONArray jsonarray = new JSONArray(response.body().string());
@@ -72,8 +73,12 @@ public class MapWayActivity extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(
+                        this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(getApplicationContext(), ParentActivity.class);
+            startActivity(intent);
             return;
         }
         googleMap.setMyLocationEnabled(true);
@@ -89,6 +94,7 @@ public class MapWayActivity extends FragmentActivity implements OnMapReadyCallba
             options.add(position);
         }
         googleMap.addPolyline(options);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(geolocationList.get(0).getLatitude(), geolocationList.get(0).getLongitude()), 15.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(geolocationList.get(0).getLatitude(), geolocationList.get(0).getLongitude()), 15.0f));
     }
 }

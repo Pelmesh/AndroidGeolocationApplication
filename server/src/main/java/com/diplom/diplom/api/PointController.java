@@ -39,6 +39,7 @@ public class PointController {
 
     @GetMapping("{id}")
     public Object getPointById(@PathVariable Long id) {
+
         return pointService.getById(id).get();
     }
 

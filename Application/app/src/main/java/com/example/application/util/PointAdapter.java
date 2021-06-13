@@ -9,9 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.application.R;
-import com.example.application.model.DaysHistory;
 import com.example.application.model.Point;
-import com.example.application.parentActivity.AllPointsActivity;
 
 import java.util.List;
 
@@ -31,12 +29,14 @@ public class PointAdapter extends ArrayAdapter<String> {
 
         View view = inflater.inflate(R.layout.activity_point, parent, false);
 
-        TextView title = (TextView) view.findViewById(R.id.title);
-        Button button = (Button) view.findViewById(R.id.button);
+        TextView title = view.findViewById(R.id.title);
+        Button deleteButton = view.findViewById(R.id.deleteButton);
+        Button checkButton = view.findViewById(R.id.checkButton);
         Point objectItem = points.get(position);
 
         title.setText(objectItem.getName());
-        button.setId(objectItem.getId().intValue());
+        deleteButton.setId(objectItem.getId().intValue());
+        checkButton.setId(objectItem.getId().intValue());
 
         return view;
     }

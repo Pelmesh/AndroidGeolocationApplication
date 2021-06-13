@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,13 +36,16 @@ public class AllPointsActivity extends AppCompatActivity {
     private SharedPreferences sPref;
     private SendData sendData = new SendData();
     private List<Point> pointList;
+//    private Button checkButton;
+//    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_controll);
         listView = findViewById(R.id.list);
-
+//        deleteButton = findViewById(R.id.deleteButton);
+//        checkButton = findViewById(R.id.checkButton);
         new Thread(() -> {
             try {
                 pointList = getPoints();
@@ -56,8 +61,8 @@ public class AllPointsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(getApplicationContext(), adapter.getItem(position).toString(),
-//                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), adapter.getItem(position).toString(),
+                        Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MapWayActivity.class);
 
                 intent.putExtra("DATE", adapter.getItem(position));
@@ -72,6 +77,25 @@ public class AllPointsActivity extends AppCompatActivity {
         Type userListType = new TypeToken<ArrayList<Point>>(){}.getType();
         JSONArray jsonarray = new JSONArray(response.body().string());
         return new Gson().fromJson(jsonarray.toString(), userListType);
+    }
+
+    public void checkPoint(View view) {
+        Intent intent = new Intent(getApplicationContext(), PointOnMapActivity.class);
+        intent.putExtra("ID", view.getId());
+        startActivity(intent);
+    }
+
+    public void deletePoint(View view) throws IOException {
+        new Thread(() -> {
+            try {
+                sendData.deletePointById(view.getId());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            runOnUiThread(() -> {
+                recreate();
+            });
+        }).start();
     }
 
 }
